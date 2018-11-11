@@ -7,11 +7,14 @@ class AAStar {
     constructor(gameField, defaultOptions = null) {
         this._cacheMap = new Map();
         this._gameField = gameField;
-        this._defaultOptions = defaultOptions || {
+        // keep defaults that are not overridden
+        defaultOptions = Object.assign({
             cacheResults: false,
             useWideSearch: false,
+            showDebugMessages: true,
             iterationsPerFrame: 10
-        };
+        }, defaultOptions);
+        this._defaultOptions = defaultOptions;
     }
     /**
      * Synchronous path calculation, returns Array of IAAStarFieldNodes
@@ -113,7 +116,7 @@ class CalculationData {
             if (this.currentNode.isFinishNode == true) {
                 //result = this.restorePath(this.currentNode);
                 this._openList.length = 0;
-                options.showDebugMessages && console.log("patch was found, steps: " + this._stepsNum);
+                this.options.showDebugMessages && console.log("patch was found, steps: " + this._stepsNum);
                 return true;
             }
             let nearCells = this._gameField.getNearNodes(this.currentNode.node);
@@ -132,7 +135,7 @@ class CalculationData {
                 });
             }
             if (this._openList.length == 0) {
-                options.showDebugMessages && console.log("Patch not found, steps:" + this._stepsNum);
+                this.options.showDebugMessages && console.log("Patch not found, steps:" + this._stepsNum);
                 return true;
             }
             this.currentNode = this._getNextNodeMethod();

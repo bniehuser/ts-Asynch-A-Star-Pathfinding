@@ -52,7 +52,7 @@ export declare class AAStar {
      */
     calculatePathAsync(from: IAAStarFieldNode, to: IAAStarFieldNode, options?: IAsyncAlgorhitmOptions): Promise<IAAStarFieldNode[]>;
     clearCache(): void;
-    private getFromCache(from, to, options);
-    private calculateAsynchStep(calculationData, onSuccess, iterationsPerFrame);
-    private restorePath(finishNode);
+    private getFromCache;
+    private calculateAsynchStep;
+    private restorePath;
 }

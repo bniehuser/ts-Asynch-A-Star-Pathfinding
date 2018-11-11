@@ -40,12 +40,14 @@ export class AAStar {
 
     constructor(gameField:IAAStarField, defaultOptions:IAsyncAlgorhitmOptions = null) {
         this._gameField = gameField;
-        this._defaultOptions = defaultOptions || {
-                                                    cacheResults: false,
-                                                    useWideSearch: false,
-                                                    showDebugMessages: true,
-                                                    iterationsPerFrame:10
-                                                    };
+        // keep defaults that are not overridden
+        defaultOptions = Object.assign({
+            cacheResults: false,
+            useWideSearch: false,
+            showDebugMessages: true,
+            iterationsPerFrame:10
+        }, defaultOptions);
+        this._defaultOptions = defaultOptions;
     }
 
     /**

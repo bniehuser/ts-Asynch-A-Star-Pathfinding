@@ -3,10 +3,10 @@ export declare class AAStarSimpleField implements IAAStarField {
     private _map;
     private _useDiagonals;
     constructor(map: number[][], useDiagonals?: boolean);
-    private convertMap(map);
+    private convertMap;
     getNodeAt(x: number, y: number): SimpleNode;
     getNearNodes(node: SimpleNode): IAAStarFieldNode[];
-    private addIfWalkable(node, array);
+    private addIfWalkable;
     heuristicDistance(a: SimpleNode, b: SimpleNode): number;
 }
 export declare class SimpleNode implements IAAStarFieldNode {
