@@ -19,6 +19,7 @@ export interface IAAStarField {
  */
 export interface IAlgorhitmOptions {
     cacheResults?:boolean,
+    showDebugMessages?:boolean,
     useWideSearch?:boolean,
 }
 /**
@@ -42,6 +43,7 @@ export class AAStar {
         this._defaultOptions = defaultOptions || {
                                                     cacheResults: false,
                                                     useWideSearch: false,
+                                                    showDebugMessages: true,
                                                     iterationsPerFrame:10
                                                     };
     }
@@ -106,7 +108,7 @@ export class AAStar {
             if (Boolean(options.useWideSearch) == Boolean(calcData.options.useWideSearch)) {
                 let nodeData:NodeData = calcData.getNodeData(to);
                 if (nodeData.previousNode != null || nodeData.isFinishNode == true) {
-                    console.log("restoring from cache");
+                    options.showDebugMessages && console.log("restoring from cache");
                     return this.restorePath(nodeData); 
                 }
             }
@@ -185,7 +187,7 @@ class CalculationData {
         if (this.currentNode.isFinishNode == true) {
             //result = this.restorePath(this.currentNode);
             this._openList.length = 0;
-            console.log ("patch was found, steps: " + this._stepsNum);
+            this.options.showDebugMessages && console.log ("patch was found, steps: " + this._stepsNum);
             return true;
         }
 
@@ -206,7 +208,7 @@ class CalculationData {
         }
 
         if (this._openList.length == 0) {
-            console.log("Patch not found, steps:" + this._stepsNum);
+            this.options.showDebugMessages && console.log("Patch not found, steps:" + this._stepsNum);
             return true;
         }
         this.currentNode = this._getNextNodeMethod();

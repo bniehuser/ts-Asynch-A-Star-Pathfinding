@@ -19,6 +19,7 @@ export interface IAAStarField {
  */
 export interface IAlgorhitmOptions {
     cacheResults?: boolean;
+    showDebugMessages?: boolean;
     useWideSearch?: boolean;
 }
 /**

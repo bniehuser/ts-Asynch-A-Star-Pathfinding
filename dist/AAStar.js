@@ -67,7 +67,7 @@ class AAStar {
             if (Boolean(options.useWideSearch) == Boolean(calcData.options.useWideSearch)) {
                 let nodeData = calcData.getNodeData(to);
                 if (nodeData.previousNode != null || nodeData.isFinishNode == true) {
-                    console.log("restoring from cache");
+                    options.showDebugMessages && console.log("restoring from cache");
                     return this.restorePath(nodeData);
                 }
             }
@@ -113,7 +113,7 @@ class CalculationData {
             if (this.currentNode.isFinishNode == true) {
                 //result = this.restorePath(this.currentNode);
                 this._openList.length = 0;
-                console.log("patch was found, steps: " + this._stepsNum);
+                options.showDebugMessages && console.log("patch was found, steps: " + this._stepsNum);
                 return true;
             }
             let nearCells = this._gameField.getNearNodes(this.currentNode.node);
@@ -132,7 +132,7 @@ class CalculationData {
                 });
             }
             if (this._openList.length == 0) {
-                console.log("Patch not found, steps:" + this._stepsNum);
+                options.showDebugMessages && console.log("Patch not found, steps:" + this._stepsNum);
                 return true;
             }
             this.currentNode = this._getNextNodeMethod();
